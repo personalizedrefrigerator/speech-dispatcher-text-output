@@ -3,7 +3,7 @@
 # Logs output from speech-dispatcher.
 # See also ~/.config/speech-dispatcher/modules/stdout-generic.conf
 
-if test "x$1" = "x--help"; then
+if test "$1" = "--help"; then
 	echo "Help: $0: Logs output from /tmp/speech-stdout"
 	exit 1
 fi

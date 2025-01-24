@@ -4,7 +4,7 @@
 
 # The directory that contains this script (and should also contain
 # other setup files).
-SCRIPT_DIR="$(dirname $0)"
+SCRIPT_DIR="$(dirname "$0")"
 
 # The path with speech-dispatcher configuration files
 CONFIG_PATH="$HOME/.config/speech-dispatcher"
@@ -22,14 +22,15 @@ echo "[...] Copying config files..."
 cp "$SCRIPT_DIR/stdout-generic.conf" "$CONFIG_PATH/modules/stdout-generic.conf"
 
 # Allow speech-dispatcher to choose the stdout-generic speech dispatcher
-if cat "$CONFIG_PATH/speechd.conf" | grep -i stdout-generic ; then
+if grep -i stdout-generic "$CONFIG_PATH/speechd.conf" ; then
 	echo "[OK] Already configured!"
 else
 
 echo '
 # Custom output module: stdout-generic was added by "speech-dispatcher-to-stdout".
 AddModule "stdout-generic" "sd_generic" "stdout-generic.conf"
-'
+' >> "$CONFIG_PATH/speechd.conf"
+	echo "[OK] Added stdout-generic as a speech-dispatcher output method"
 
 fi
 
