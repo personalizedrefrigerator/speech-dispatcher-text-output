@@ -1,16 +1,25 @@
 #!/bin/bash
 
-SCRIPT_PATH="$(dirname $0)"
+# setup.sh: Configures speech-dispatcher.
+
+# The directory that contains this script (and should also contain
+# other setup files).
+SCRIPT_DIR="$(dirname $0)"
+
+# The path with speech-dispatcher configuration files
 CONFIG_PATH="$HOME/.config/speech-dispatcher"
 
+# Create configuration directories, if they don't exist.
 if test ! -d "$CONFIG_PATH" ; then
 	echo "[WARN] Speech dispatcher configuration not found. Running spd-conf to create a user configuration file. Please follow the prompts."
+	# -u: Create settings for the current user
+	# -c: Configure basic settings
 	spd-conf -uc
 fi
 
 # Copy config files
 echo "[...] Copying config files..."
-cp "$SCRIPT_PATH/stdout-generic.conf" "$CONFIG_PATH/modules/stdout-generic.conf"
+cp "$SCRIPT_DIR/stdout-generic.conf" "$CONFIG_PATH/modules/stdout-generic.conf"
 
 # Allow speech-dispatcher to choose the stdout-generic speech dispatcher
 if cat "$CONFIG_PATH/speechd.conf" | grep -i stdout-generic ; then
@@ -24,5 +33,5 @@ AddModule "stdout-generic" "sd_generic" "stdout-generic.conf"
 
 fi
 
-echo "Done!"
+echo "[OK] Done!"
 
