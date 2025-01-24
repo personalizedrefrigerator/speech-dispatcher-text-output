@@ -22,7 +22,7 @@ echo "[...] Copying config files..."
 cp "$SCRIPT_DIR/stdout-generic.conf" "$CONFIG_PATH/modules/stdout-generic.conf"
 
 # Allow speech-dispatcher to choose the stdout-generic speech dispatcher
-if grep -i stdout-generic "$CONFIG_PATH/speechd.conf" ; then
+if grep -i 'AddModule.*stdout-generic' "$CONFIG_PATH/speechd.conf" ; then
 	echo "[OK] Already configured!"
 else
 
