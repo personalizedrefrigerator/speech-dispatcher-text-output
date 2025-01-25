@@ -1,6 +1,6 @@
-# speech-dispatcher-to-stdout
+# speech-dispatcher-text-output
 
-This project sets up an output module for the Linux `speech-dispatcher`. Rather than speaking aloud, output is logged to a FIFO, which can be redirected to a terminal.
+This project sets up an output module for [`speech-dispatcher`](https://github.com/brailcom/speechd) that logs text to a terminal (rather than speaking it aloud).
 
 # Setup
 
