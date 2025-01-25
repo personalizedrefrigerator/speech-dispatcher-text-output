@@ -16,13 +16,18 @@ This project sets up an output module for [`speech-dispatcher`](https://github.c
 ## Option 2: Manual setup
 
 1. Run `spd-conf -uc` to initialize speech-dispatcher configuration files.
-2. Copy `stdout-generic.conf` to `~/.config/speech-dispatcher/modules/`
-3. Add `stdout-generic` as an output module. At the end of `~/.config/speech-dispatcher/speechd.conf`, add,
+   - On some distributions, `spd-conf -uc` fails to run (e.g. error: can't find `XDG_CONFIG_HOME`). It may be sufficient to manually create a `~/.config/speech-dispatcher/speechd.conf` file that imports `/etc/speech-dispatcher/speechd.conf`. For example,
+     ```config
+     # In ~/.config/speech-dispatcher/speechd.conf"
+     Include "/etc/speech-dispatcher/speechd.conf"
+     ```
+3. Copy `stdout-generic.conf` to `~/.config/speech-dispatcher/modules/`
+4. Add `stdout-generic` as an output module. At the end of `~/.config/speech-dispatcher/speechd.conf`, add,
    ```conf
    #         Name             Type         Configuration file
    AddModule "stdout-generic" "sd_generic" "stdout-generic.conf"
    ```
-4. (Optional) In `~/.config/speech-dispatcher/speechd.conf`, change `DefaultModule` to `stdout-generic`.
+5. (Optional) In `~/.config/speech-dispatcher/speechd.conf`, change `DefaultModule` to `stdout-generic`.
 
 After setup, run `log-speech.sh` to:
 1. Create a fifo `/tmp/speech-stdout` (with `mkfifo`).
